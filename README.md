@@ -7,14 +7,14 @@ the current commit/branch.
 
 Tipically you will only need to install this as a devDependency as follows"
 
-`npm install --save-dev calculate-version`
+`npm install --save-dev git-repo-version`
 
 ## Usage
 
 This plugin automatically exports a function that when called calculates return the version string.
 
 ```js
-var calculateVersion = require('calculate-version');
+var version = require('git-repo-version')();
 ```
 
 ## Credits
