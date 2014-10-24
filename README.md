@@ -11,13 +11,10 @@ Tipically you will only need to install this as a devDependency as follows"
 
 ## Usage
 
-This plugin automatically exports a function that when called calculates return the version string.
+This plugin automatically exports a function that when called calculates return the version string with a sha of the given length (defaults to 8)
 
 ```js
-var version = require('git-repo-version')();
+var getVersion = require('git-repo-version');
+getVersion();   // "1.5.0-beta.1+pre.a1b2c3d4"
+getVersion(10); // "1.5.0-beta.1+pre.a1b2c3d4e5"
 ```
-
-## Credits
-
-The code that calculates the version has been extracted from https://github.com/emberjs/ember.js
-
