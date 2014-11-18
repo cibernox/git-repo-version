@@ -2,10 +2,10 @@
 
 var path = require('path');
 
-module.exports = function version(shaLength, projectPath) {
-  if (projectPath == null) {
-    projectPath = process.cwd();
-  }
+module.exports = function version(shaLength, root) {
+
+  var projectPath = root || process.cwd();
+
   var packageVersion  = require(path.join(projectPath, 'package.json')).version;
 
   if (packageVersion.indexOf('+') > -1) {
