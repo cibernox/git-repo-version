@@ -12,5 +12,7 @@ module.exports = function version(shaLength, root) {
   }
 
   var packageVersion  = require(path.join(projectPath, 'package.json')).version;
-  return packageVersion + '.' + info.sha.slice(0, shaLength || 8);
+  var sha = info.sha || '';
+
+  return packageVersion + '.' + sha.slice(0, shaLength || 8);
 };
