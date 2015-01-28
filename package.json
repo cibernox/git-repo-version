@@ -1,6 +1,6 @@
 {
   "name": "git-repo-version",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "https://github.com/cibernox/git-repo-version",
   "engines": {
     "node": ">= 0.10.0"
