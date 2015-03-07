@@ -1,3 +1,5 @@
+/* jshint node:true, eqnull:true */
+
 'use strict';
 
 var path       = require('path');
