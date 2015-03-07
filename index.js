@@ -1,3 +1,5 @@
+/* jshint node:true, eqnull:true */
+
 'use strict';
 
 var path       = require('path');
@@ -13,6 +15,15 @@ module.exports = function version(shaLength, root) {
 
   var packageVersion  = require(path.join(projectPath, 'package.json')).version;
   var sha = info.sha || '';
+  var prefix;
 
-  return packageVersion + '.' + sha.slice(0, shaLength || 8);
+  if (packageVersion != null) {
+    prefix = packageVersion;
+  } else if (info.branch) {
+    prefix = info.branch;
+  } else {
+    prefix = 'DETACHED_HEAD';
+  }
+
+  return prefix + '.' + sha.slice(0, shaLength || 8);
 };
