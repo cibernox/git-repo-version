@@ -25,5 +25,5 @@ module.exports = function version(shaLength, root) {
     prefix = 'DETACHED_HEAD';
   }
 
-  return prefix + '.' + sha.slice(0, shaLength || 8);
+  return prefix + '+' + sha.slice(0, shaLength || 8);
 };
