@@ -8,7 +8,7 @@ var getGitInfo = require('git-repo-info');
 module.exports = function version(shaLength, root) {
   var projectPath = root || process.cwd();
 
-  var info = getGitInfo();
+  var info = getGitInfo(projectPath);
   if (info.tag) {
     return info.tag;
   }
