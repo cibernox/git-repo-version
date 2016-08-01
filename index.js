@@ -7,13 +7,17 @@ var getGitInfo = require('git-repo-info');
 
 module.exports = function version(shaLength, root) {
   var projectPath = root || process.cwd();
-
+  var packageVersion  = require(path.join(projectPath, 'package.json')).version;
   var info = getGitInfo(projectPath);
+
   if (info.tag) {
-    return info.tag;
+    if (packageVersion && info.tag.includes(packageVersion)) {
+      return packageVersion;
+    } else {
+      return info.tag;
+    }
   }
 
-  var packageVersion  = require(path.join(projectPath, 'package.json')).version;
   var sha = info.sha || '';
   var prefix;
 
