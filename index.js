@@ -11,7 +11,7 @@ module.exports = function version(shaLength, root) {
   var info = getGitInfo(projectPath);
 
   if (info.tag) {
-    if (packageVersion && info.tag.includes(packageVersion)) {
+    if (packageVersion && info.tag.indexOf(packageVersion) !== -1) {
       return packageVersion;
     } else {
       return info.tag;
