@@ -29,5 +29,5 @@ module.exports = function version(options) {
 
   var authorDate = includeDate ? ' ' + info.authorDate : '';
 
-  return prefix + '+' + sha.slice(0, shaLength || 8) + authorDate;
+  return prefix + '+' + sha + authorDate;
 };
