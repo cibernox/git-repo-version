@@ -29,6 +29,14 @@ describe('getVersion', function () {
     assert.equal(result, expected);
   });
 
+  it('should not include sha when shaLength set to zero', function () {
+    const shaLength = 0;
+    var result = getVersion({ shaLength: shaLength });
+    var expected = packageVersion;
+
+    assert.equal(result, expected);
+  });
+
   it('should include date', function () {
     var result = getVersion({ includeDate: true });
     var revision = require('child_process').execSync('git rev-parse HEAD').toString().trim().substring(0, 8);

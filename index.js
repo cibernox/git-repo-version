@@ -7,7 +7,7 @@ var getGitInfo = require('git-repo-info');
 
 module.exports = function version(options) {
   options = options || {};
-  var shaLength = options.shaLength || 8;
+  var shaLength = options.shaLength != null ? options.shaLength : 8;
   var includeDate = options.includeDate || false;
   var projectPath = options.projectPath || process.cwd();
   var info = getGitInfo(projectPath);
@@ -24,10 +24,12 @@ module.exports = function version(options) {
     prefix = 'DETACHED_HEAD';
   }
 
-  var sha = info.sha ? info.sha : '';
-  sha = sha.substring(0, shaLength);
+  var sha = '';
+  if (shaLength > 0 && info.sha) {
+    sha = '+' +  info.sha.substring(0, shaLength);
+  }
 
   var authorDate = includeDate ? ' ' + info.authorDate : '';
 
-  return prefix + '+' + sha + authorDate;
+  return prefix + sha + authorDate;
 };

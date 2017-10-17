@@ -15,9 +15,10 @@ This plugin automatically exports a function that when called calculates return 
 
 ```js
 var getVersion = require('git-repo-version');
-getVersion(); // "1.5.0-beta.1+pre.a1b2c3d4"
-getVersion({ shaLength: 10 }); // "1.5.0-beta.1+pre.a1b2c3d4e5"
-getVersion({ shaLength: 10, includeDate: true }); // "1.5.0-beta.1+pre.a1b2c3d4e5 2016-10-24T18:26:53.000Z"
+getVersion(); // "1.5.0+a1b2c3d4"
+getVersion({ shaLength: 10 }); // "1.5.0+a1b2c3d4e5"
+getVersion({ shaLength: 10, includeDate: true }); // "1.5.0+a1b2c3d4e5 2016-10-24T18:26:53.000Z"
+getVersion({ shaLength: 0, includeDate: true }); // "1.5.0 2016-10-24T18:26:53.000Z"
 ```
 
 The way this function works is:
