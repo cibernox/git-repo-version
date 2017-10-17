@@ -5,23 +5,18 @@
 var path       = require('path');
 var getGitInfo = require('git-repo-info');
 
-module.exports = function version(shaLength, root) {
-  var projectPath = root || process.cwd();
-  var packageVersion  = require(path.join(projectPath, 'package.json')).version;
+module.exports = function version(options) {
+  options = options || {};
+  var shaLength = options.shaLength != null ? options.shaLength : 8;
+  var includeDate = options.includeDate || false;
+  var projectPath = options.projectPath || process.cwd();
   var info = getGitInfo(projectPath);
+  var packageVersion  = require(path.join(projectPath, 'package.json')).version;
 
-  if (info.tag) {
-    if (packageVersion && info.tag.indexOf(packageVersion) !== -1) {
-      return packageVersion;
-    } else {
-      return info.tag;
-    }
-  }
-
-  var sha = info.sha || '';
   var prefix;
-
-  if (packageVersion != null) {
+  if (info.tag && info.tag.includes(packageVersion)) {
+    prefix = info.tag;
+  } else if (packageVersion) {
     prefix = packageVersion;
   } else if (info.branch) {
     prefix = info.branch;
@@ -29,5 +24,12 @@ module.exports = function version(shaLength, root) {
     prefix = 'DETACHED_HEAD';
   }
 
-  return prefix + '+' + sha.slice(0, shaLength || 8);
+  var sha = '';
+  if (shaLength > 0 && info.sha) {
+    sha = '+' +  info.sha.substring(0, shaLength);
+  }
+
+  var authorDate = includeDate ? ' ' + info.authorDate : '';
+
+  return prefix + sha + authorDate;
 };
