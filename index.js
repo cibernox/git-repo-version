@@ -14,7 +14,7 @@ module.exports = function version(options) {
   var packageVersion  = require(path.join(projectPath, 'package.json')).version;
 
   var prefix;
-  if (info.tag && info.tag.includes(packageVersion)) {
+  if (info.tag && !(packageVersion && info.tag.includes(packageVersion))) {
     prefix = info.tag;
   } else if (packageVersion) {
     prefix = packageVersion;
