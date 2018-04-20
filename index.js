@@ -9,6 +9,7 @@ module.exports = function version(options) {
   options = options || {};
   var shaLength = options.shaLength != null ? options.shaLength : 8;
   var includeDate = options.includeDate || false;
+  var includeCommitsSinceLastTag = options.includeCommitsSinceLastTag !== false;
   var projectPath = options.projectPath || process.cwd();
   var info = getGitInfo(projectPath);
   var packageVersion  = require(path.join(projectPath, 'package.json')).version;
@@ -29,7 +30,12 @@ module.exports = function version(options) {
     sha = '+' +  info.sha.substring(0, shaLength);
   }
 
+  var commitsSinceLastTag = ''
+  if(info.commitsSinceLastTag && includeCommitsSinceLastTag) {
+    commitsSinceLastTag = '+' + info.commitsSinceLastTag
+  }
+
   var authorDate = includeDate ? ' ' + info.authorDate : '';
 
-  return prefix + sha + authorDate;
+  return prefix + commitsSinceLastTag + sha + authorDate;
 };
