@@ -13,7 +13,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "git-repo-info": "^1.4.1"
+    "git-repo-info": "^2.0.0"
   },
   "devDependencies": {
     "mocha": "^4.0.1"
